@@ -1,0 +1,42 @@
+---
+- hosts: server
+  become: yes
+  tasks:
+    - name: Install ufw
+      apt:
+        name: ufw
+        state: present
+
+    - name: Set logging
+      ufw:
+        logging: "on"
+
+    - name: Allow HTTP
+      ufw:
+        rule: allow
+        port: "80"
+
+    - name: Allow HTTPS
+      ufw:
+        rule: allow
+        port: "443"
+
+    - name: Allow SSH
+      ufw:
+        rule: allow
+        port: "22"
+        proto: tcp
+
+    - name: Deny incoming connections
+      ufw:
+        direction: incoming
+        policy: deny
+
+    - name: Allow outgoing connections
+      ufw:
+        direction: outgoing
+        policy: allow
+
+    - name: Enable UFW
+      ufw:
+        state: enabled
