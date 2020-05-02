@@ -1,0 +1,10 @@
+---
+- hosts: server
+  become: yes
+  vars:
+    service_host: "antoinechalifour.dev"
+    service_admin_email: "antoine.chalifour@gmail.com"
+    service_name: "antoinechalifour"
+    letsencrypt_ssl_dir: "/etc/letsencrypt/live"
+  roles:
+    - nginx
